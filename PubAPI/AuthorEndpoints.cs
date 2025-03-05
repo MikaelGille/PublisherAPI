@@ -13,16 +13,21 @@ public static class AuthorEndpoints
 
         group.MapGet("/", async (PubContext db) =>
         {
-            return await db.Authors.Include(a => a.Books)
-                                   .AsNoTracking().ToListAsync();
+            return await db.Authors
+                .Include(a => a.Books)
+                    .ThenInclude(b => b.Cover)
+                .AsNoTracking()
+                .ToListAsync();
         })
         .WithName("GetAllAuthors")
         .WithOpenApi();
 
         group.MapGet("/{AuthorId}", async Task<Results<Ok<Author>, NotFound>> (int authorid, PubContext db) =>
         {
-            return await db.Authors.Include(a => a.Books)
-                                   .AsNoTracking()
+            return await db.Authors
+                .Include(a => a.Books)
+                    .ThenInclude(b => b.Cover)
+                .AsNoTracking()
                 .FirstOrDefaultAsync(model => model.AuthorId == authorid)
                 is Author model
                     ? TypedResults.Ok(model)
