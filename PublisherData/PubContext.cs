@@ -26,9 +26,10 @@ public class PubContext : DbContext
         var authorList = new Author[]{
             new Author {AuthorId = 2, FirstName = "Ruth", LastName = "Ozeki" },
             new Author {AuthorId = 3, FirstName = "Sofia", LastName = "Segovia" },
-            new Author {AuthorId = 4, FirstName = "Ursula K.", LastName = "LeGuin" },
-            new Author {AuthorId = 5, FirstName = "Hugh", LastName = "Howey" },
-            new Author {AuthorId = 6, FirstName = "Isabelle", LastName = "Allende" }
+            new Author {AuthorId = 4, FirstName = "Mikael", LastName = "Gille"},
+            new Author {AuthorId = 5, FirstName = "Ursula K.", LastName = "LeGuin" },
+            new Author {AuthorId = 6, FirstName = "Hugh", LastName = "Howey" },
+            new Author {AuthorId = 7, FirstName = "Isabelle", LastName = "Allende" }
         };
         modelBuilder.Entity<Author>().HasData(authorList);
 
@@ -36,15 +37,18 @@ public class PubContext : DbContext
             new Book {BookId = 1, AuthorId=1, Title = "In God's Ear",
                 PublishDate= new DateOnly(1989,3,1) },
             new Book {BookId = 2, AuthorId=2, Title = "A Tale For the Time Being",
-            PublishDate = new DateOnly(2013,12,31) },
+                PublishDate = new DateOnly(2013,12,31) },
             new Book {BookId = 3, AuthorId=3, Title = "The Left Hand of Darkness",
-            PublishDate=new DateOnly(1969,3,1)} };
+                PublishDate=new DateOnly(1969,3,1) },
+            new Book { BookId = 4, AuthorId = 4, Title = "Livet som webbutvecklare",
+                PublishDate = new DateOnly(2025, 3, 5) }};
         modelBuilder.Entity<Book>().HasData(someBooks);
 
         var someArtists = new Artist[]{
             new Artist {ArtistId = 1, FirstName = "Pablo", LastName="Picasso"},
             new Artist {ArtistId = 2, FirstName = "Dee", LastName="Bell"},
-            new Artist {ArtistId = 3, FirstName ="Katharine", LastName="Kuharic"} };
+            new Artist {ArtistId = 3, FirstName = "Katharine", LastName="Kuharic"},
+            new Artist {ArtistId = 4, FirstName = "Leonardo", LastName="da Vinci"}};
         modelBuilder.Entity<Artist>().HasData(someArtists);
 
         var someCovers = new Cover[]{
@@ -53,7 +57,9 @@ public class PubContext : DbContext
             new Cover {CoverId = 2, BookId=2,
                 DesignIdeas= "Should we put a clock?", DigitalOnly=true},
             new Cover {CoverId = 3, BookId=1,
-                DesignIdeas="A big ear in the clouds?", DigitalOnly = false}};
+                DesignIdeas="A big ear in the clouds?", DigitalOnly = false},
+            new Cover {CoverId = 4, BookId=4,
+                DesignIdeas="Nattvarden", DigitalOnly=false}};
         modelBuilder.Entity<Cover>().HasData(someCovers);
 
         modelBuilder.Entity<Author>()
